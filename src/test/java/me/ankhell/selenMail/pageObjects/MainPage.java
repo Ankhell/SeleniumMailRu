@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 
 abstract class MainPage {
 
-    WebDriver driver;
+    final WebDriver driver;
 
     public MainPage(WebDriver driver) {
         this.driver = driver;
@@ -41,9 +41,6 @@ abstract class MainPage {
 
     @FindBy (css = "div[class=\"search-panel-button js-shortcut\"]")
     protected WebElement searchButton;
-
-//    @FindBy (xpath = "//div[.='Поиск']")
-//    protected WebElement searchButton;
 
     @FindBy (id = "PH_logoutLink")
     protected WebElement logoutLink;

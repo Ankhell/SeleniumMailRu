@@ -1,15 +1,11 @@
-package me.ankhell.selenMail.SQL;
+package me.ankhell.selenMail.sql;
 
-import me.ankhell.selenMail.Config.Config;
+import me.ankhell.selenMail.config.Config;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
-import static me.ankhell.selenMail.Config.Config.*;
+import static me.ankhell.selenMail.config.Config.dbData;
 
 public class GetEmailDataFromDB {
 

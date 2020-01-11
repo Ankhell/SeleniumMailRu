@@ -5,7 +5,7 @@ import org.openqa.selenium.support.FindBy;
 
 abstract class LoginPage {
 
-    WebDriver driver;
+    final WebDriver driver;
 
     public LoginPage(WebDriver driver){
         this.driver = driver;

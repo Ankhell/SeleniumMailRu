@@ -7,7 +7,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class MainPageActions extends MainPage {
 
-    WebDriverWait wait;
+    final WebDriverWait wait;
 
     public MainPageActions(WebDriver driver) {
         super(driver);
@@ -31,10 +31,6 @@ public class MainPageActions extends MainPage {
         messageBox.sendKeys(message);
     }
 
-    public void clickSendMessage() {
-        sendMailButton.click();
-    }
-
     public void altSendMessage(){
         Actions actions = new Actions(driver);
         actions.keyDown(messageBox,Keys.CONTROL).sendKeys(messageBox,Keys.RETURN).build().perform();
@@ -42,8 +38,6 @@ public class MainPageActions extends MainPage {
 
     public void logout(){
         driver.get("https://r.mail.ru/cls1074201/auth.mail.ru/cgi-bin/logout?next=1&lang=ru_RU&Page=https%3A%2F%2Fmail.ru%2F%3Ffrom%3Dlogout");
-//        wait.until(ExpectedConditions.elementToBeClickable(logoutLink));
-//        logoutLink.click();
     }
 
     public boolean isSentSuccessVisible() {

@@ -1,4 +1,4 @@
-package me.ankhell.selenMail.сonfig;
+package me.ankhell.selenMail.config;
 
 import me.ankhell.selenMail.sql.GetEmailDataFromDB;
 
@@ -45,14 +45,14 @@ final public class Config {
         ConfigFile dbConfig = new ConfigFile(dbConfigFileName);
 
         dbData = new Config.DBData();
-        dbData.url = dbConfig.getProperty("URL");
-        dbData.username = dbConfig.getProperty("USERNAME");
-        dbData.password = dbConfig.getProperty("PASSWORD");
+        dbData.url = dbConfig.getProperty("url");
+        dbData.username = dbConfig.getProperty("username");
+        dbData.password = dbConfig.getProperty("password");
         emailList = GetEmailDataFromDB.getData();
         message = new Message();
-        message.messageText = configFile.getProperty("MESSAGE");
-        message.topic = configFile.getProperty("MESSAGE_TOPIC");
-        driverPaths.put("gecko",configFile.getProperty("GECKO"));
-        driverPaths.put("chromedriver",configFile.getProperty("CHROMEDRIVER"));
+        message.messageText = configFile.getProperty("message");
+        message.topic = configFile.getProperty("messageTopic");
+        driverPaths.put("gecko",configFile.getProperty("gecko"));
+        driverPaths.put("chromedriver",configFile.getProperty("chromedriver"));
     }
 }

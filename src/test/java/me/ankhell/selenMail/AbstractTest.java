@@ -1,12 +1,9 @@
 package me.ankhell.selenMail;
 
-import me.ankhell.selenMail.Config.Config;
-import me.ankhell.selenMail.Utils.SeleniumDriverManager;
+import me.ankhell.selenMail.config.Config;
+import me.ankhell.selenMail.utils.SeleniumDriverManager;
 import me.ankhell.selenMail.pageObjects.LoginPageActions;
 import me.ankhell.selenMail.pageObjects.MainPageActions;
-
-import static me.ankhell.selenMail.TestHelpers.*;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -22,10 +19,12 @@ import org.testng.annotations.Test;
 
 import java.util.Random;
 
+import static me.ankhell.selenMail.TestHelpers.*;
+
 public abstract class AbstractTest {
 
-    private final static String CONFIG_FILENAME = "config.cfg";
-    private final static String DB_CONFIG_FILENAME = "dbconnection.scfg";
+    private final static String CONFIG_FILENAME = "properties.properties";
+    private final static String DB_CONFIG_FILENAME = "DBProperties.sproperties";
     WebDriver driver;
     SeleniumDriverManager driverManager;
 
@@ -42,20 +41,8 @@ public abstract class AbstractTest {
     @Test(description = "Login test with correct username and password")
     public void loginTest() {
         Config.Email mail = getRandomEmail();
-
-//        LoginPageActions loginPage = PageFactory.initElements(driver, LoginPageActions.class);
-//        loginPage.typeUsername(mail.username);
-//        loginPage.clickSubmit();
-//        if (!loginPage.isPasswordInputVisible()) {
-//            Assert.fail("Can't find password input field");
-//        }
-//        loginPage.typePassword(mail.password);
-//        loginPage.clickSubmit();
-//        Assert.assertTrue(loginPage.isUsernameOutputVisible());
         correctDataLogIn(driver,mail);
         logOut(driver);
-//        MainPageActions mainPage = PageFactory.initElements(driver, MainPageActions.class);
-//        mainPage.logout();
     }
 
     @Test(description = "Trying to login with incorrect username")
@@ -97,7 +84,7 @@ public abstract class AbstractTest {
     @Test(description = "Inbox counter updated = > Message delivered")
     public void messageDeliveredTest() {
 
-        int msgCounter = 0;
+        int msgCounter;
 
         Config.Email email1 = getRandomEmail();
         Config.Email email2;
@@ -134,15 +121,7 @@ public abstract class AbstractTest {
         } while (email1.equals(email2));
 
         correctDataLogIn(driver,email2);
-//        MainPageActions mainPage = PageFactory.initElements(driver, MainPageActions.class);
-//        mainPage.clickNewMessage();
-//        mainPage.setMessageRecipient(email1.username);
-//        mainPage.setMessageTopic(message.topic);
-//        mainPage.setMessage(message.messageText);
-//        mainPage.altSendMessage();
-//        mainPage.isSentSuccessVisible();
         sendMail(driver,email1.username,message);
-//        mainPage.logout();
         logOut(driver);
         correctDataLogIn(driver,email1);
         MainPageActions mainPage = PageFactory.initElements(driver, MainPageActions.class);

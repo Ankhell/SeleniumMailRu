@@ -25,8 +25,6 @@ public class LoginPageActions extends LoginPage {
                     .build()
                     .perform();
         }
-//        usernameInput.sendKeys(Keys.CONTROL + "a");
-//        usernameInput.sendKeys(Keys.DELETE);
         usernameInput.sendKeys(username);
     }
 
@@ -48,6 +46,7 @@ public class LoginPageActions extends LoginPage {
         }
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public boolean isUsernameOutputVisible() {
         return isVisible(usernameOutput);
     }
@@ -60,12 +59,4 @@ public class LoginPageActions extends LoginPage {
         return isVisible(errorFooter);
     }
 
-    public boolean isLoginInputVisible() {
-        return isVisible(usernameInput);
-    }
-
-    public void clearUsernameInput() {
-        Actions actions = new Actions(driver);
-        actions.keyDown(usernameInput, Keys.CONTROL).sendKeys(usernameInput, "a" + Keys.DELETE).build().perform();
-    }
 }

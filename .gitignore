@@ -27,4 +27,4 @@ target
 *.iml
 
 # gitsafe config files
-*.scfg
+.sproperties

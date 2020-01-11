@@ -1,6 +1,6 @@
 package me.ankhell.selenMail;
 
-import me.ankhell.selenMail.Config.Config;
+import me.ankhell.selenMail.config.Config;
 import me.ankhell.selenMail.pageObjects.LoginPageActions;
 import me.ankhell.selenMail.pageObjects.MainPageActions;
 import org.jetbrains.annotations.NotNull;

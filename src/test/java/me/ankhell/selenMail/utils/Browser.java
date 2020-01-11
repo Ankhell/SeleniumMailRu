@@ -1,4 +1,4 @@
-package me.ankhell.selenMail.Utils;
+package me.ankhell.selenMail.utils;
 
 public enum Browser {
     CHROME,

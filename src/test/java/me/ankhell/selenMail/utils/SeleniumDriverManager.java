@@ -1,4 +1,4 @@
-package me.ankhell.selenMail.Utils;
+package me.ankhell.selenMail.utils;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -13,7 +13,7 @@ public class SeleniumDriverManager {
     private static final int IMPLICITLY_TIMEOUT = 1;
     private static final TimeUnit IMPLICITLY_TIMEOUT_TIME_UNITS = TimeUnit.SECONDS;
 
-    private Map<Long,WebDriver> driverMap = new HashMap<>();
+    private final Map<Long,WebDriver> driverMap = new HashMap<>();
 
     public WebDriver getDriver(Browser browser){
 
