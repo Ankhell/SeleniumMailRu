@@ -24,7 +24,7 @@ abstract class MainPage {
     @FindBy(css = "div[tabindex = \"505\"]")
     protected WebElement messageBox;
 
-    @FindBy(css = "span[tabindex = \"570\"]")
+    @FindBy(css = "span[title=\"Отправить\"]")
     protected WebElement sendMailButton;
 
     @FindBy (css = "span[class=\"layer-sent-page__contact-item\"]")
@@ -36,4 +36,15 @@ abstract class MainPage {
     @FindBy (css = ".badge_transparent > span:nth-child(1)")
     protected WebElement newMsgCounter;
 
+    @FindBy (css = "input")
+    protected WebElement searchBar;
+
+    @FindBy (css = "div[class=\"search-panel-button js-shortcut\"]")
+    protected WebElement searchButton;
+
+//    @FindBy (xpath = "//div[.='Поиск']")
+//    protected WebElement searchButton;
+
+    @FindBy (id = "PH_logoutLink")
+    protected WebElement logoutLink;
 }

@@ -1,9 +1,7 @@
 package me.ankhell.selenMail.pageObjects;
 
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.Point;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -37,6 +35,17 @@ public class MainPageActions extends MainPage {
         sendMailButton.click();
     }
 
+    public void altSendMessage(){
+        Actions actions = new Actions(driver);
+        actions.keyDown(messageBox,Keys.CONTROL).sendKeys(messageBox,Keys.RETURN).build().perform();
+    }
+
+    public void logout(){
+        driver.get("https://r.mail.ru/cls1074201/auth.mail.ru/cgi-bin/logout?next=1&lang=ru_RU&Page=https%3A%2F%2Fmail.ru%2F%3Ffrom%3Dlogout");
+//        wait.until(ExpectedConditions.elementToBeClickable(logoutLink));
+//        logoutLink.click();
+    }
+
     public boolean isSentSuccessVisible() {
         try {
             wait.until(ExpectedConditions.visibilityOf(sentSuccess));
@@ -48,7 +57,7 @@ public class MainPageActions extends MainPage {
 
     public int getNewMsgCount() {
         String input = newMsgCounter.getText();
-        if (!input.matches("^\\d+$")){
+        if (!input.matches("^\\d+$")) {
             Point position;
             Dimension size;
             position = driver.manage().window().getPosition();
@@ -60,5 +69,19 @@ public class MainPageActions extends MainPage {
             driver.manage().window().setSize(size);
         }
         return Integer.parseInt(input);
+    }
+
+    public void sendKeysToSearchBar(String input) {
+        Point position;
+        Dimension size;
+        position = driver.manage().window().getPosition();
+        size = driver.manage().window().getSize();
+        driver.manage().window().maximize();
+        wait.until(ExpectedConditions.elementToBeClickable(searchButton));
+        searchButton.click();
+        driver.manage().window().setPosition(position);
+        driver.manage().window().setSize(size);
+        wait.until(ExpectedConditions.visibilityOf(searchBar));
+        searchBar.sendKeys(input + Keys.RETURN);
     }
 }

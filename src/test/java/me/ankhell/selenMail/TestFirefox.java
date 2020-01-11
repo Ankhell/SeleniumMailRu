@@ -8,6 +8,6 @@ public class TestFirefox extends AbstractTest {
     @BeforeMethod
     @Override
     public void methodInit() {
-        driver.set(driverManager.getDriver(Browser.FIREFOX, MODE));
+        driver = driverManager.getDriver(Browser.FIREFOX);
     }
 }

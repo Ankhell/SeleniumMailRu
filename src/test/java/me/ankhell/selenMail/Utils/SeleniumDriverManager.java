@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class SeleniumDriverManager {
@@ -11,39 +13,34 @@ public class SeleniumDriverManager {
     private static final int IMPLICITLY_TIMEOUT = 1;
     private static final TimeUnit IMPLICITLY_TIMEOUT_TIME_UNITS = TimeUnit.SECONDS;
 
-    WebDriver driver;
+    private Map<Long,WebDriver> driverMap = new HashMap<>();
 
-    public WebDriver getDriver(Browser browser, DriverMode driverMode) {
+    public WebDriver getDriver(Browser browser){
 
-        switch (driverMode) {
-            case SINGLETHREAD:
-                if (driver != null) {
-                    return driver;
-                } else {
-                    return getNewDriver(browser);
-                }
-            case PARALLEL:
-                return getNewDriver(browser);
+        long tid = Thread.currentThread().getId();
+
+        if (driverMap.containsKey(tid)){
+            return driverMap.get(tid);
+        } else {
+            switch (browser){
+                case FIREFOX:
+                    driverMap.put(tid,new FirefoxDriver());
+                    driverMap.get(tid).manage().timeouts().implicitlyWait(IMPLICITLY_TIMEOUT, IMPLICITLY_TIMEOUT_TIME_UNITS);
+                    return driverMap.get(tid);
+                case CHROME:
+                    driverMap.put(tid,new ChromeDriver());
+                    driverMap.get(tid).manage().timeouts().implicitlyWait(IMPLICITLY_TIMEOUT, IMPLICITLY_TIMEOUT_TIME_UNITS);
+                    return driverMap.get(tid);
+                default:
+                    return null;
+            }
         }
-        return driver;
     }
 
-    private WebDriver getNewDriver(Browser browser){
-        switch (browser) {
-            case CHROME:
-                driver = new ChromeDriver();
-                break;
-            case FIREFOX:
-                driver = new FirefoxDriver();
-                break;
-            default:
-                return null;
+    public void closeAll(){
+        for (Map.Entry<Long,WebDriver> driver : driverMap.entrySet()){
+            driver.getValue().close();
         }
-        driver.manage().timeouts().implicitlyWait(IMPLICITLY_TIMEOUT, IMPLICITLY_TIMEOUT_TIME_UNITS);
-        return driver;
-    }
-
-    public void conditionalDriverClose(WebDriver driver, DriverMode driverMode, DriverMode driverCloseCondition){
-        if (driverMode.equals(driverCloseCondition)) driver.close();
+        driverMap.clear();
     }
 }
