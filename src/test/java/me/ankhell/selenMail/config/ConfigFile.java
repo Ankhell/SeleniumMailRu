@@ -1,4 +1,4 @@
-package me.ankhell.selenMail.Config;
+package me.ankhell.selenMail.сonfig;
 
 import java.io.IOException;
 import java.util.Properties;

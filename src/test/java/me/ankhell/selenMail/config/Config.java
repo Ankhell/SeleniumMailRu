@@ -1,6 +1,6 @@
-package me.ankhell.selenMail.Config;
+package me.ankhell.selenMail.сonfig;
 
-import me.ankhell.selenMail.SQL.GetEmailDataFromDB;
+import me.ankhell.selenMail.sql.GetEmailDataFromDB;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,11 +11,11 @@ final public class Config {
     public static ArrayList<Email> emailList;
     public static DBData dbData;
     public static Message message;
-    public static Map<String,String> driverPaths = new HashMap<>();
+    public static final Map<String,String> driverPaths = new HashMap<>();
 
     public static class Email{
-        public String username;
-        public String password;
+        public final String username;
+        public final String password;
 
         public Email(String username, String password){
             this.username = username;
